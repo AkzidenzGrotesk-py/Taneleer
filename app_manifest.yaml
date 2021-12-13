@@ -1,0 +1,51 @@
+_metadata:
+  major_version: 1
+  minor_version: 1
+display_information:
+  name: Taneleer Tivan
+  description: I track coins and treasure for you.
+  background_color: "#257ac9"
+  long_description: A treasure collector useful for tracking the number of coins and other mismatched treasures you might have. May potentially sell your treasure to someone else, maybe you shouldn't trust him. Mention me with an operation to edit my storage.
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: Taneleer
+    always_online: true
+  slash_commands:
+    - command: /vault-help
+      url: ../slack/Vault/help
+      description: Display full usage guide.
+      usage_hint: /vault-help
+      should_escape: false
+    - command: /vault
+      url: ../slack/Vault/update
+      description: Add or remove items from the vault. Use channel, +/-, a number, and an item name.
+      usage_hint: /vault +50gp
+      should_escape: false
+    - command: /show-vault
+      url: ../slack/Vault/show
+      description: Return the vault contents. Use a name to choose a channel to see, * shows all.
+      usage_hint: /show-vault *
+      should_escape: false
+    - command: /add-vault
+      url: ../slack/Vault/add
+      description: Add a new vault channel.
+      usage_hint: /add-vault thomas
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - chat:write.public
+      - channels:history
+settings:
+  event_subscriptions:
+    request_url: ../slack/events
+    bot_events:
+      - message.channels
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
