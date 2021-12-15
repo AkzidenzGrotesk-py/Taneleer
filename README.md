@@ -10,8 +10,8 @@ You must host the app yourself.
 -6gp
 +14sp
 ```
-- Add item descriptions
-- Item display values (e.g. display `mapOfFrance` as `Map of France`)
 - Add values using display value instead of ID (`/vault 5 "Map of France"`)
-- More configuration commands
 - Consistent message style and format
+- ✓ More configuration commands
+- ✓ Add item descriptions
+- ✓ Item display values (e.g. display `mapOfFrance` as `Map of France`)
