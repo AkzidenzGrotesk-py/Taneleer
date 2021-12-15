@@ -25,6 +25,10 @@ features:
       description: Add or remove items from the vault. Use channel, +/-, a number, and an item name.
       usage_hint: /vault +50gp
       should_escape: false
+    - command: /-vault
+      url: ../slack/Vault/extends
+      description: An extension of /vault command.
+      usage_hint: /-vault ri global gp
     - command: /show-vault
       url: ../slack/Vault/show
       description: Return the vault contents. Use a name to choose a channel to see, * shows all.
@@ -34,6 +38,11 @@ features:
       url: ../slack/Vault/add
       description: Add a new vault channel.
       usage_hint: /add-vault thomas
+      should_escape: false
+    - command: /confg-vault
+      url: ../slack/Vault/config
+      description: Configure vault.
+      usage_hint: /confg-vault display mapOfFrance Map of France
 oauth_config:
   scopes:
     bot:
