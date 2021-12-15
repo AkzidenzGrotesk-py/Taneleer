@@ -6,7 +6,12 @@ You must host the app yourself.
 ## Current Features (`/vault-help`)
 ### ***Taneleer\'s Vault***
 `/vault-help` - see help message\
-`/vault [channel] [+/-] [amount] [item]` - modify item value in given vault. Assumes `global` if no channel given, or if channel does not exist. `channel` argument must be surrounded by spaces, other arguments can be joined together. e.g. `/vault +1 potionOfHealing`\*.\
+`/vault [channel] [+/-] [amount] [item]` - modify item value in given vault. Assumes `global` if no channel given, or if channel does not exist. `channel` argument must be surrounded by spaces, other arguments can be joined together. e.g. `/vault +1 potionOfHealing`\*. This pattern of `channel, +/-, amount, item` can be repeated on new lines to bulk append items.\
+```perl
+/vault +200 gp
+thomas +100 gp
++200 sp
+```
 `/add-vault [channel]` - add vault with given name.\
 `/show-vault [channel]` - show contents of given vault. Assumes `global` if no channel given. Sums all values if `*` given.\
 `/confg-vault [config] [...]` - change the current configuration.\
@@ -22,15 +27,10 @@ You must host the app yourself.
 *It is recommended that item names are done in camelCase to keep consistency.\
 
 ## Todo
-- Add multiple values at once, e.g.
-```perl
-/vault 5 mapOfFrance
--6gp
-+14sp
-```
 - Add values using display value instead of ID (`/vault 5 "Map of France"`)
-- Consistent message style and format
 - Item priority levels, items will be displayed earlier/later in the /show-vault command
+- ✓ Add multiple values at once, e.g. *removed*
+- ✓ Consistent message style and format
 - ✓ More configuration commands
 - ✓ Add item descriptions
 - ✓ Item display values (e.g. display `mapOfFrance` as `Map of France`)
