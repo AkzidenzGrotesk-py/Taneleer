@@ -29,6 +29,7 @@ You must host the app yourself.
 ```
 - Add values using display value instead of ID (`/vault 5 "Map of France"`)
 - Consistent message style and format
+- Item priority levels, items will be displayed earlier/later in the /show-vault command
 - ✓ More configuration commands
 - ✓ Add item descriptions
 - ✓ Item display values (e.g. display `mapOfFrance` as `Map of France`)
