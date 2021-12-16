@@ -60,6 +60,7 @@ thomas +100 gp
 \t`/confg-vault zero [item]` - item will not be cleared when value reaches zero.
 \t`/confg-vault display [item] [display name] [...]` - item will now display as a different display name (which can contain spaces) when `/show-vault` is called.
 \t`/confg-vault display remove [item]` - item will no longer use display name
+\t`/confg-vault priorities [list priorities]` - set (not add) priorities in the order given
 `/-vault [...]` - vault extension commands, extension of `/vault`.
 \t`/-vault ri [channel] [item]` - set value of item in channel to 0.
 \t`/-vault rc [channel] [repeat]` - removes entire channel, must end with the channel name repeated for operation to complete.
