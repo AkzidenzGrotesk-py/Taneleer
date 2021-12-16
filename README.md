@@ -29,7 +29,7 @@ thomas +100 gp
 
 ## Todo
 - Add values using display value instead of ID (`/vault 5 "Map of France"`)
-- Item priority levels, items will be displayed earlier/later in the /show-vault command
+- ✓ Item priority levels, items will be displayed earlier/later in the /show-vault command
 - ✓ Add multiple values at once, e.g. *removed*
 - ✓ Consistent message style and format
 - ✓ More configuration commands
