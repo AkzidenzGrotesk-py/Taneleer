@@ -1,6 +1,5 @@
 '''Tanaleer storage bot'''
 import os
-from sys import exit as sysexit
 from pathlib import Path
 import slack
 from dotenv import load_dotenv
