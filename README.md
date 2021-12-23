@@ -28,6 +28,8 @@ thomas +100 gp
 *It is recommended that item names are done in camelCase to keep consistency.\
 
 ## Todo
+- Add alphabetical sorting to messages which contain lists of items
+- Allow the categorization of items and the grouping of categorized items
 - Add values using display value instead of ID (`/vault 5 "Map of France"`)
 - ✓ Item priority levels, items will be displayed earlier/later in the /show-vault command
 - ✓ Add multiple values at once, e.g. *removed*
