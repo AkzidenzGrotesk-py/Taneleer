@@ -6,6 +6,7 @@ import slack
 from dotenv import load_dotenv
 from flask import Flask, request, Response
 from slackeventsapi import SlackEventAdapter
+from waitress import serve
 
 ENV_PATH = Path('.') / '.env'
 load_dotenv(dotenv_path = ENV_PATH)
@@ -34,15 +35,6 @@ Message format rules:
 - Inline "headings" (e.g. _Try:_ ...) should be _italicized_.
 '''
 
-def fatal_error(desc: str) -> None:
-    '''Post complete fail message'''
-    print(f"\033[31m[ERROR] {desc}\033[0m")
-    CLIENT.chat_postMessage(
-        channel = os.environ["BOT_CHANNEL"],
-        text = f"*Taneleen has died unexpectedly. _Reason:_* {desc}"
-    )
-    sysexit(1)
-
 def vault_help_msg() -> str:
     '''Return the vault help message string'''
     return """*_Taneleer\'s Vault_*
@@ -68,6 +60,11 @@ thomas +100 gp
 \t`/-vault dnote [item]` - delete note at item
 *It is recommended that item names are done in camelCase to keep consistency.
 """
+
+def vault_add_report(report_str: str) -> None:
+    '''Add a report to the vault file'''
+    with open(os.environ["VAULT_REPORTS"], "a") as reportfile:
+        reportfile.write(report_str + "\n")
 
 def vault_save_config(new_config: dict) -> None:
     '''Save a new configuration'''
@@ -145,7 +142,7 @@ def parse_vault() -> dict:
             case ["~", value, name]:
                 vault_dict[current_vault][name] = int(value)
             case _:
-                fatal_error("unrecognized formatting in vault file")
+                continue
 
     return vault_dict
 
@@ -295,6 +292,7 @@ Names must be alphabetical, values must be numerical.\n_Try:_ `/vault 5gp`", use
 
         message_text += f"Vault item `{name}` in vault *{channel}* was modified {operation}{amount} \
 to a total of {vault_contents[channel][name]} {name}.\n"
+        vault_add_report("{channel} {name} -> {operation}{amount} {vault_contents[channel][name]}")
 
     save_vault(vault_contents)
 
@@ -493,13 +491,23 @@ def vault_updt_config():
                 f"`{iden}` -> \"{config['display_names'][iden]}\", "
                 for iden in config["display_names"]
             ])[:-2]
+            item_notes = "".join([
+                f"`{iden}`: \"{config['item_notes'][iden]}\", "
+                for iden in config["item_notes"]
+            ])[:-2]
             zero_excp = "".join([
                 f"`{excpt}`, "
                 for excpt in config["zero_exceptions"]
             ])[:-2]
+            prior = "".join([
+                f"`{pri}`, "
+                for pri in config["priority"]
+            ])[:-2]
             message_text = f"_*Current Taneleer Configuration*_\
                 \n_Display names (`display`):_ {disp_names}\
-                \n_Zero exceptions (`zero`):_ {zero_excp}"
+                \n_Zero exceptions (`zero`):_ {zero_excp}\
+                \n_Priority order (`priorities`):_ {prior}\
+                \n_Item notes (`-vault note`):_ {item_notes}"
         case "priorities":
             if len(command) < 2:
                 return_cmd_error("_Error:_ Editing the `priority` field requires\
@@ -547,7 +555,7 @@ display as _{config['display_names'][command[1]]}_ when `/show-vault`"
 
 def main() -> None:
     '''Main function'''
-    APP.run(debug = True)
+    serve(APP, port = 5000)
 
 if __name__ == "__main__":
     main()
