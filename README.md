@@ -1,7 +1,7 @@
 # Taneleer
 Manage values in Slack. Made for D&amp;D.
 
-You must host the app yourself.
+You must host the app yourself, this can be done through [ngrok](https://ngrok.com/).
 
 ## Current Features (`/vault-help`)
 ### ***Taneleer\'s Vault***
